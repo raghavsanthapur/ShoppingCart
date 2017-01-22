@@ -1,4 +1,4 @@
-<ion-view view-title="Menu">
+<ion-view view-title="Checkout Page">
   <ion-content class="padding">
     <ion-list>
       <ion-item class="row" ng-repeat="item in items">
@@ -6,30 +6,36 @@
           <div class="col col-20" ng-click="increaseQuantity(item)">
             <i class="icon ion-plus-circled"></i>
           </div>
-          <div class="col col-20" id="quantity" ng-bind="quantity">{{item.count}}</div>
+          <div class="col col-20" id="quantity">{{item.count}}</div>
           <div class="col col-20" ng-click="item.count >0 && decreaseQuantity(item)">
           <i class="icon ion-minus-circled"></i>
           </div>      
       </ion-item>
 
       <div class="col col-100">Total amount - ${{total/100}}</div>
-      <!-- <ion-item class="row">
-          <div class="col col-40">Orange</div>
-          <div class="col col-20" ng-click="increaseQuantity1()">
-            <i class="icon ion-plus-circled"></i>
-
-          </div>
-          <div class="col col-20" id="quantity1" ng-bind="quantity1"></div>
-          <div class="col col-20" ng-click="decreaseQuantity1()">
-          <i class="icon ion-minus-circled"></i>
-          </div>   
-      </ion-item> -->
       
+
+      <ion-item class="row" ng-repeat="item in offers">
+          <div class="col col-40">{{item.name}}</div>
+          <div class="col col-60">
+            Buy {{item.buy}} for  {{item.costOf}} price
+          </div> 
+      </ion-item>
     </ion-list>
-    <div ng-style="{'text-align':'center','margin-top':'50px'}" ng-click="goToCart()">
+
+    <div class="col col-100" ng-if="newTotal > 0">Revised amount - ${{newTotal/100}}</div>
+    <div class="col col-100" ng-if="newTotal > 0"> Discount = ${{(total - newTotal)/100}}</div>
+    <!-- <div ng-style="{'text-align':'center','margin-top':'50px'}" ng-click="goToCart()">
        <button class="button button-dark">
       goToCart
       </button>  
+      </div> -->
+
+      <div ng-style="{'text-align':'center','margin-top':'50px'}" ng-click="applyOffers()">
+       <button class="button button-dark">
+      Apply Offers
+      </button>  
       </div>
+
   </ion-content>
 </ion-view>

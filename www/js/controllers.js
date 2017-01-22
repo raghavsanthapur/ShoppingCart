@@ -4,7 +4,7 @@ angular.module('starter.controllers', [])
   var val =angular.element(document.getElementById('quantity'))[0];
 
 $scope.total = 0;
-
+$scope.newTotal = 0; 
 $scope.items = [
     
     {
@@ -21,6 +21,21 @@ $scope.items = [
 
 ];
 
+$scope.offers = [
+
+  {
+    'name' : 'Apple',
+    'buy' : 2,
+    'costOf' : 1
+  },
+  {
+    'name' : 'Orange',
+    'buy' : 3,
+    'costOf' : 2
+  }
+
+];
+
 $scope.cart = angular.copy($scope.items);
 
 $scope.getReceipt = function(){
@@ -29,6 +44,35 @@ $scope.getReceipt = function(){
         $scope.total += ($scope.items[j].count * $scope.items[j].cost);
     }
   console.log('total ', $scope.total);
+
+}
+
+$scope.applyOffers = function(){
+  if($scope.offers.length > 0){
+    $scope.newTotal = 0; 
+    for (var i = $scope.items.length - 1; i >= 0; i--) {
+      for (var j = $scope.offers.length - 1; j >= 0; j--) {
+        if($scope.items[i].name == $scope.offers[j].name){
+          if($scope.items[i].count < $scope.offers[j].buy){
+            $scope.newTotal += ($scope.items[i].count * $scope.items[i].cost);
+          } else {
+            var count = $scope.items[i].count;
+            while(count > 0){
+              if(count >= $scope.offers[j].buy){
+                $scope.newTotal += ($scope.offers[j].costOf * $scope.items[i].cost);
+                count -= $scope.offers[j].buy;
+              } else {
+                $scope.newTotal += (count * $scope.items[i].cost);
+                count = 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  console.log('total', $scope.total);
 }
 
 $scope.increaseQuantity =function(item){
