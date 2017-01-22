@@ -1,0 +1,35 @@
+<ion-view view-title="Menu">
+  <ion-content class="padding">
+    <ion-list>
+      <ion-item class="row" ng-repeat="item in items">
+          <div class="col col-40">{{item.name}} - {{item.cost}}c</div>
+          <div class="col col-20" ng-click="increaseQuantity(item)">
+            <i class="icon ion-plus-circled"></i>
+          </div>
+          <div class="col col-20" id="quantity" ng-bind="quantity">{{item.count}}</div>
+          <div class="col col-20" ng-click="item.count >0 && decreaseQuantity(item)">
+          <i class="icon ion-minus-circled"></i>
+          </div>      
+      </ion-item>
+
+      <div class="col col-100">Total amount - ${{total/100}}</div>
+      <!-- <ion-item class="row">
+          <div class="col col-40">Orange</div>
+          <div class="col col-20" ng-click="increaseQuantity1()">
+            <i class="icon ion-plus-circled"></i>
+
+          </div>
+          <div class="col col-20" id="quantity1" ng-bind="quantity1"></div>
+          <div class="col col-20" ng-click="decreaseQuantity1()">
+          <i class="icon ion-minus-circled"></i>
+          </div>   
+      </ion-item> -->
+      
+    </ion-list>
+    <div ng-style="{'text-align':'center','margin-top':'50px'}" ng-click="goToCart()">
+       <button class="button button-dark">
+      goToCart
+      </button>  
+      </div>
+  </ion-content>
+</ion-view>
